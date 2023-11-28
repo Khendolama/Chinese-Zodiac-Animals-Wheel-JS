@@ -1,5 +1,4 @@
-// L@@K CHALLENGE !!: SORTING ARRAY of OBJECTS by NUM and STR KEYS
-// Provide the missing code in the 3 spots that say "L@@K CHALLENGE !!"
+//Chinese Zodiac Animals with Spinning Wheel and Range Slider
 
 // get the section (red box) which holds all the animals:
 const section = document.querySelector('section');
@@ -7,7 +6,6 @@ const section = document.querySelector('section');
 const sortMenu = document.querySelector('select');
 sortMenu.addEventListener('change', sortAnimals);
 
-// L@@K CHALLENGE !!
 //  write function that runs when checkbox is checked or unchecked
 // get the checkbox menu and have it run inline anon func:
 // - this code is very short, so rather than declare a function for this
@@ -79,14 +77,15 @@ function renderAnimals() { // output the 12 animals to the section
         let yearsStr = `<span style="background-color:#C21;padding:3px 5px;color:#fff;">
                         ${animal.yr}</span><br><br>`;
        
-        // L@@K CHALLENGE !! -- write the for loop that concats the yearsStr
+        //  write the for loop that concats the yearsStr
         // there should be a total of 12 years: 2020 2008 1996 1984 1972 1960
         for(let y = animal.yr-12; y >= animal.yr-120; y-=12) {
             yearsStr += y + " ";
         }
         yearsP.innerHTML = yearsStr; // put animal yr string in p-tag
     } // end loop
-} // end renderAnimals() function
+    
+};
 
 // sortAnimals() runs on change to select menu:
 function sortAnimals() {
@@ -94,28 +93,31 @@ function sortAnimals() {
     // save chosen key to a var:
     let key = this.value; // 'eng', 'chi', 'yr'
     //  { eng: "dog", chi: "gou", yr: 2030 }
+    
     // sort by object key in ascending order usingcallback(a,b) algo:
     animals.sort(function(a,b) {
         return a[key] > b[key] ? 1 : -1;
     });
+    
     // if checkbox is checked, reverse the sort order from ascending to descending order
     if(descendCB.checked) animals.reverse();
     renderAnimals();  // render a freshly sorted animals DOM
-}
+} // end function sortAnimals()
 
-// L@@K CHALLENGE !! Make the wheel spin !
+// Make the wheel spin !
 // setInterval takes two args: a callback and a time delay in ms
 // setInterval(callback, milisec)
 const wheel = document.querySelector('.wheel');
-let angle = 0;
-let wheelSpeed = 0.5;
-// get the slider (id="slider") and have it call 
-// a func on 'change'
+let angle = 0; //the wheel angle of rotation
+let wheelSpeed = 0.5; // the degrees of rotation every time it rotates
+
+// get the slider (id="slider") and have it call a func on 'change'
 const slider = document.getElementById('slider');
+// every time slider is changed, run func inline to set wheel speed based on slider value
 slider.addEventListener('change', function() {
     wheelSpeed = this.value / 100;
-})
-
+});
+// every 25 milisec, increase the angle of rotation by the wheel speed
 window.setInterval(function() {
     angle += wheelSpeed;
     wheel.style.transform = `rotate(${angle}deg)`;
